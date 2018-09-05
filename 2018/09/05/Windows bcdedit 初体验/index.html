@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Windows bcdedit 初体验"/>
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="dexfire &#39;s blogs"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://dexfire.iask.in"/>
+  
+    <link rel="alternate" href="/atom.xml" title="dexfire &#39;s blogs" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>dexfire 's blogs</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Windows bcdedit 初体验</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/dexfire">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:dexfire@163.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By John Doe</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-09-05</span>
+            <span class="time">19:29:13</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Windows-系统/">Windows 系统</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Windows/">#Windows</a> <a class="tag" href="/tags/bcdedit/">#bcdedit</a> <a class="tag" href="/tags/boot/">#boot</a> <a class="tag" href="/tags/开机流程/">#开机流程</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h1 id="BCDEdit-概述"><a href="#BCDEdit-概述" class="headerlink" title="BCDEdit 概述"></a>BCDEdit 概述</h1><blockquote>
+</blockquote>
+<p>BCDEdit 是 Windows 启动管理程序，灵活使用可以解决很多问题，比如简洁优雅的安装 Ubuntu ISO 镜像。</p>
+<h3 id="BCDEdit-help"><a href="#BCDEdit-help" class="headerlink" title="BCDEdit help"></a>BCDEdit help</h3><p>微软的帮助简直又臭又长，GUID=<strong>众所周知的标识符</strong>这翻译也是活见鬼了，看完还是不知道怎么使用，又没有 Linux man 那样强大的 manual 手册，只有自己一步一步摸索了~</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">C:\&gt;bcdedit /? /create</span><br><span class="line"></span><br><span class="line">此命令在启动配置数据存储中创建新项。如果</span><br><span class="line">指定了众所周知的标识符，则不能</span><br><span class="line">指定 /application、/inherit 和 /device 选项。如果未指定 &lt;id&gt;，</span><br><span class="line">或者 &lt;id&gt; 非众所周知，则必须指定 /application、/inherit</span><br><span class="line">或 /device 选项。</span><br><span class="line"></span><br><span class="line">bcdedit /create [&#123;&lt;id&gt;&#125;] [/d &lt;description&gt;] [/application &lt;apptype&gt; |</span><br><span class="line">    /inherit [&lt;apptype&gt;] | /inherit DEVICE | /device]</span><br><span class="line"></span><br><span class="line">    &lt;id&gt;                    指定要用于新项的</span><br><span class="line">                            标识符。有关标识符的详细信息，请运行</span><br><span class="line">                            &quot;bcdedit /? ID&quot;。</span><br><span class="line"></span><br><span class="line">    &lt;description&gt;           指定要应用于新项的</span><br><span class="line">                            描述。</span><br><span class="line"></span><br><span class="line">    /application &lt;apptype&gt;  指定新项必须是应用程</span><br><span class="line">                            序项。&lt;apptype&gt; 指定应用程序类型。</span><br><span class="line">                            &lt;apptype&gt; 可以是下列类型之一:</span><br><span class="line"></span><br><span class="line">                                BOOTAPP</span><br><span class="line">                                BOOTSECTOR</span><br><span class="line">                                OSLOADER</span><br><span class="line">                                RESUME</span><br><span class="line">                                STARTUP</span><br><span class="line"></span><br><span class="line">                            如果使用其他应用程序类型而不是</span><br><span class="line">                            这些类型之一，则还必须指定众所周知的</span><br><span class="line">                            标识符。</span><br><span class="line"></span><br><span class="line">    /inherit [&lt;apptype&gt;]    指定新项必须是继</span><br><span class="line">                            承项，&lt;apptype&gt; 指定应用程序</span><br><span class="line">                            类型。如果未指定 &lt;apptype&gt;，则任何项</span><br><span class="line">                            都可以继承该项。如果已指定，</span><br><span class="line">                            则 &lt;apptype&gt; 可以是下列类型之一:</span><br><span class="line"></span><br><span class="line">                                BOOTMGR</span><br><span class="line">                                BOOTSECTOR</span><br><span class="line">                                FWBOOTMGR</span><br><span class="line">                                MEMDIAG</span><br><span class="line">                                NTLDR</span><br><span class="line">                                OSLOADER</span><br><span class="line">                                RESUME</span><br><span class="line"></span><br><span class="line">                            此修饰符可防止 &lt;apptype&gt; 的</span><br><span class="line">                            应用程序项继承该继承项。</span><br><span class="line"></span><br><span class="line">    /inherit DEVICE         指定新项必须是继承</span><br><span class="line">                            项，且该项只能由</span><br><span class="line">                            设备选项项继承。</span><br><span class="line"></span><br><span class="line">    /device                 指定新项必须是附加的</span><br><span class="line">                            设备选项项。</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h3 id="系统启动项配置示例"><a href="#系统启动项配置示例" class="headerlink" title="系统启动项配置示例"></a>系统启动项配置示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">C:\&gt;bcdedit</span><br><span class="line"></span><br><span class="line">Windows 启动管理器</span><br><span class="line">--------------------</span><br><span class="line">标识符                  &#123;bootmgr&#125;</span><br><span class="line">**device                  partition=C:**</span><br><span class="line">description             Windows Boot Manager</span><br><span class="line">locale                  zh-CN</span><br><span class="line">inherit                 &#123;globalsettings&#125;</span><br><span class="line">default                 &#123;current&#125;</span><br><span class="line">resumeobject            &#123;7d24403d-9e54-11e8-a98a-b05e96d7a6af&#125;</span><br><span class="line">displayorder            &#123;current&#125;</span><br><span class="line">                        &#123;334d38b1-b3ef-11e7-8bea-ac9e17e11ccd&#125;</span><br><span class="line">toolsdisplayorder       &#123;memdiag&#125;</span><br><span class="line">timeout                 10</span><br><span class="line"></span><br><span class="line">Windows 启动加载器</span><br><span class="line">-------------------</span><br><span class="line">标识符                  &#123;current&#125;</span><br><span class="line">**device                  partition=C:</span><br><span class="line">path                    \WINDOWS\system32\winload.exe**</span><br><span class="line">description             Windows 10</span><br><span class="line">locale                  zh-CN</span><br><span class="line">inherit                 &#123;bootloadersettings&#125;</span><br><span class="line">recoverysequence        &#123;ac014489-9e54-11e8-b56a-8d4f42caf12a&#125;</span><br><span class="line">displaymessageoverride  Recovery</span><br><span class="line">recoveryenabled         Yes</span><br><span class="line">allowedinmemorysettings 0x15000075</span><br><span class="line">osdevice                partition=C:</span><br><span class="line">systemroot              \WINDOWS</span><br><span class="line">resumeobject            &#123;7d24403d-9e54-11e8-a98a-b05e96d7a6af&#125;</span><br><span class="line">nx                      OptIn</span><br><span class="line">bootmenupolicy          Standard</span><br><span class="line"></span><br><span class="line">实模式启动扇区</span><br><span class="line">---------------------</span><br><span class="line">标识符                  &#123;334d38b1-b3ef-11e7-8bea-ac9e17e11ccd&#125;</span><br><span class="line">**device                  partition=F:</span><br><span class="line">path                    \deepin\winboot\wubildr.mbr**</span><br><span class="line">description             Deepin</span><br></pre></td></tr></table></figure>
+<pre><code>这里可以看到，同样是 Linux 系统出身的 Deepin 启动项非常简洁，从所有启动项都有device项来看，device是必须存在的值。
+暂时还看不出来启动方式是什么，要知道系统启动方式，我们先要了解系统从通电按开机键到系统启动进入桌面都经历了哪些初始化过程。
+</code></pre><h2 id="PC-OS-启动流程"><a href="#PC-OS-启动流程" class="headerlink" title="PC OS 启动流程"></a>PC OS 启动流程</h2><pre><code>首先我们知道，我们的开机操作（戳一下开机按钮）是在直接对主板操作的，根据常识来说，这一步之后应该有以下流程。
+
+按开机键 --&gt; 主板通电 --&gt; 主板初始化基本外设[CPU、内存、键盘、鼠标、显示器]
+ --&gt; 启动BIOS，BIOS决定从哪里引导系统 --&gt; OS Loader --&gt; 硬件完全初始化 --&gt; 软件系统初始化 --&gt; 进入登陆界面  --&gt; 见到可爱的桌面
+</code></pre><h2 id="主板管理的引导方式-BIOS（Basic-Iput-Output-System）-UEIF（Unified-Extensible-Fimware-Interface）启动"><a href="#主板管理的引导方式-BIOS（Basic-Iput-Output-System）-UEIF（Unified-Extensible-Fimware-Interface）启动" class="headerlink" title="主板管理的引导方式 - BIOS（Basic Iput Output System）/ UEIF（Unified Extensible Fimware Interface）启动"></a>主板管理的引导方式 - BIOS（Basic Iput Output System）/ UEIF（Unified Extensible Fimware Interface）启动</h2><pre><code>比较新的PC主板一般都支持UEFI引导模式了，同时出于兼容性考虑一般会保留传统的BIOS引导方式，只是换了个名字叫做Legacy Mode。    
+</code></pre><p><strong>BIOS和UEFI简单比较</strong><br>    因为偏离话题，这里简答概括： </p>
+<pre><code>- BIOS 效率低下，只能使用16位模式，不支持GPT（GUID Partition Table）的磁盘；
+- UEFI接口统一，在主板上就可以初始化到32bit或者64bit模式，支持大容量硬盘、大容量内存。
+</code></pre><h3 id="BIOS（Legacy）引导模式"><a href="#BIOS（Legacy）引导模式" class="headerlink" title="BIOS（Legacy）引导模式"></a>BIOS（Legacy）引导模式</h3><pre><code>BIOS引导，现在被称作Legacy（传统，遗留）模式也就是老版本的引导模式，只支持MBR分区表的硬盘。 
+</code></pre><p><a href="https://gss2.bdstatic.com/9fo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=22316f5d700e0cf3b4fa46a96b2f997a/d058ccbf6c81800aabbb4b41b33533fa828b4727.jpg" target="_blank" rel="noopener">我心目中的BIOS大概是这个样子。</a></p>
+<h4 id="MBR引导程序"><a href="#MBR引导程序" class="headerlink" title="MBR引导程序"></a><strong>MBR引导程序</strong></h4><blockquote>
+<p>MBR: Master Boot Record主引导记录，位于硬盘第一个Sector（扇区）结构为[分区表446 Bytes – 引导程序54 Bytes – 校验数据8 Bytes]。</p>
+</blockquote>
+<p>启动的时候，从硬盘最开头512字节读取出引导程序–MBR，MBR的引导程序包含了活动分区标识（Windows磁盘管理或者Diskgenius之类的工具可以查看和修改），MBR引导程序做的事情很简单，就是把系统控制权转让给活动分区头部定义的引导程序–VBR。</p>
+<p>没有图，因为从来没有人见过这个东东，MBR引导没有UI界面。<br><a href="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1534270416575&amp;di=dc8f2f2edc89ac8f247d4b28d0bef7ac&amp;imgtype=0&amp;src=http%3A%2F%2Fwww.xinjiadiy.com%2Fimages%2Farticle_img%2Ftuwen%2F20170509%2F4524.jpg" target="_blank" rel="noopener">非要有图的话大概就是这个样子吧。</a></p>
+<h4 id="VBR引导程序"><a href="#VBR引导程序" class="headerlink" title="VBR引导程序"></a><strong>VBR引导程序</strong></h4><blockquote>
+<p>VBR: Volume Boot Record，分区启动记录，是<strong>Windows分区格式</strong>[FAT系列，NTFS系列…]的头部第一个扇区内的的启动程序。<br>因为是Windows系分区才有的东西，所以不难想到VBR也是MS家独有的。<br>VBR可以使用bootsect.exe工具来修改。</p>
+</blockquote>
+<p>和MBR一样，VBR也是见光死的东东，VBR本来也应该没有界面，但其实也不算是完全无界面，因为那个左上角一直在闪的小下划线就是VBR展示出来的。当系统启动文件丢失的时候，还会出现这个↓<br><a href="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1534270970234&amp;di=c65d7f7287cafec7b837caeca5706eb4&amp;imgtype=0&amp;src=http%3A%2F%2Fs16.sinaimg.cn%2Fmiddle%2F73c4589egb85cf69da05f%26690" target="_blank" rel="noopener">NTLDR is missing …</a><br>启动之后将控制权转给 OS Loader，OS Loader主要分为NT52和NT60两个分支，以下是详细介绍：</p>
+<h5 id="NTLDR-NT系统引导器-NT52"><a href="#NTLDR-NT系统引导器-NT52" class="headerlink" title="NTLDR NT系统引导器(NT52)"></a><strong>NTLDR NT系统引导器(NT52)</strong></h5><p>这是XP时代占领了我们90S几乎全部童年的主流引导方式，<br><a href="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1534271261752&amp;di=626295e5a5b7d925a7dd41ef0553ab9a&amp;imgtype=jpg&amp;src=http%3A%2F%2Fimg2.imgtn.bdimg.com%2Fit%2Fu%3D150412567%2C61855605%26fm%3D214%26gp%3D0.jpg" target="_blank" rel="noopener">哇~是熟悉的感觉..</a><br>主要组成是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NTLDR</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NTDETECT.COM</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">boot.ini</span><br></pre></td></tr></table></figure>
+<p>这三个文件，且必须位于分区根目录，<br>启动界面就是上面看到的熟悉的系统选择界面，然后从特定文件夹(Windows)，由NTLDR这个机器码程序来完成NT系统kernel的启动，系统的完全启动。<br>过程比较简单，这里就不过多分析了。</p>
+<h5 id="Windows-Boot-Manager-NT60"><a href="#Windows-Boot-Manager-NT60" class="headerlink" title="Windows Boot Manager(NT60)"></a><strong>Windows Boot Manager(NT60)</strong></h5><blockquote>
+<p>Windows Boot Manager（WBM）是从Windows Vista时代开始进入我们视线的，微软重写了NTLDR代码，也就升级成bootmgr，它和NTLDR是处于同一层次的，至于开机是进入旧版的NTLDR，还是新版的WBM取决于VBR的配置。<br><a href="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1534271437916&amp;di=d751711827ba5b14700cc27beaf8277d&amp;imgtype=0&amp;src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2F4afbfbedab64034fff8d9bafadc379310b551dd2.jpg" target="_blank" rel="noopener">电脑被玩坏的时候会出现这个有木有？</a></p>
+<ul>
+<li>程序本体bootmgr<br>位于<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\bootmgr</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<p>，且只能位于活动分区根目录。</p>
+<ul>
+<li>配置文件BCD<br>WBM的配置文件是BCD（Boot Configure Data），BCD文件结构是类似于注册表二进制文件，启动时被挂载到注册表的[HKEY_LOCAL_MACHINE\BCD00000000]位置，你可以在这里看到相关的启动参数，有权限的话也可以用regedit.exe在这里修改启动参数（前提是要能看得懂它的神秘代码T^T）。<br>BCD在Legacy模式对应于文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Boot\BCD</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>，同时还有一份用于UEFI模式的拷贝，位于<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\EFI\Microsoft\Boot\BCD</span><br></pre></td></tr></table></figure></p>
+<p><strong>修改BCD数据的工具</strong></p>
+<ul>
+<li>bcdedit.exe<br>命令行，无界面，高效，强大。</li>
+<li>regedit.exe<br>可能只有Geek才会用吧，毕竟12000004代表description这种事情只有程序员才会去记是不是？😳</li>
+<li>EasyBCD<br>比较好用，不过也是要按教程来操作。</li>
+<li>BCDTICE<br>小而强大。</li>
+<li>Visual BCD Editor<br>没听过，没用过。</li>
+</ul>
+<p><strong>Windows 10 无法修改BCD的解释</strong><br>在win10下传统打开CMD 是无法编辑BCDedit<br>需要按 Win+X+Shift+A 以管理员的身份打开CMD ，然后再输入bcdedit</p>
+<p><strong>Windows Boot Manager所支持的启动类型</strong><br>选择非常丰富，它实现了启动过程的多样化跳转，具体支持的启动方式如下：</p>
+<ul>
+<li><p>application - 从某个二进制文件启动。</p>
+<ul>
+<li>bootapp<br>启动器文件，可以是ntldr，bootmgr，gnu grub(类unix系统)等等。</li>
+<li>bootsector<br>从一个分区启动，比如Win 10、XP双系统在启动XP时候就是用的这一类型。</li>
+<li>osloader<br>启动一个NT6+类Windows系统，对应于winload.exe，包括Vista、Win 7、Win 8、Win 10都可以按照这个类型来启动。</li>
+<li>resume<br>网上资料很少，似乎是一种数据恢复模式，启动文件为winresume.exe。</li>
+<li>startup<br>猜测是继续启动。</li>
+</ul>
+</li>
+<li><p>inherit - 继承模式</p>
+<ul>
+<li>bootmgr</li>
+<li>bootsector</li>
+<li>fwbootmgr<br>Firmware boot这个选项支持启动到特殊固件区域，比如平板电脑的刷机模式。</li>
+<li>ntldr</li>
+<li>osloader</li>
+<li>resume</li>
+<li>device</li>
+</ul>
+</li>
+<li><p>special - 系统内置标识符，都是特殊启动方式</p>
+<ul>
+<li>{ bootmgr }<br>指定启动管理器程序，没错，你可以换一个启动管理器。</li>
+<li>{ ntldr }<br>类XP系统。</li>
+<li>{ default }<br>默认启动项。</li>
+<li>…</li>
+</ul>
+</li>
+<li><p>device - 设备启动，U盘、光盘或者第二硬盘的启动。</p>
+</li>
+</ul>
+<h3 id="EFI启动模式"><a href="#EFI启动模式" class="headerlink" title="EFI启动模式"></a>EFI启动模式</h3><blockquote>
+<p>EFI 和 Legacy 模式的区别很大，UEFI在微软的文档中被描述为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- Firmware boot loaders provided by the SoC vendor.</span><br><span class="line">- UEFI (Unified Extensible Firmware Interface) environment provided by the SoC vendor.</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>，EFI模式由板载系统直接将系统硬件初始化，然后从EFI保留分区读取<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.efi</span><br></pre></td></tr></table></figure></p>
+<p>格式数据。<br>通过EFI可以直接启动 Boot Manager 甚至是直接启动一个系统，相比于传统启动模式，EFI省略了很多跳转，对于硬件条件足够强大的今天，EFI可以大大加快启动速度，减少启动过程中出现的问题（传统模式中任何一个环节出错系统都无法正常启动）。</p>
+<p><a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/bringup/images/oem-boot-flow-overview.png" target="_blank" rel="noopener">EFI启动模式</a></p>
+<h4 id="First-Stage-bootloaders-FSBL"><a href="#First-Stage-bootloaders-FSBL" class="headerlink" title="First-Stage bootloaders (FSBL)"></a>First-Stage bootloaders (FSBL)</h4><p>根据 Wikipedia 的描述，系统在启动之前先初始化部分内存，</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
