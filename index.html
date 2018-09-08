@@ -61,6 +61,123 @@
       <div id="main" class="wrapper">
         <div id="primary" class="site-content"><div id="content" role="main">
   
+    <article id="post-Butter-knife 黄油刀简述" class="post-Butter-knife 黄油刀简述 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://dexfire.iask.in/2018/09/09/Butter-knife 黄油刀简述/" data-id="cjltn8shy0001gwuswbr20fbw" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h1 id="初识-Butter-Knife"><a href="#初识-Butter-Knife" class="headerlink" title="初识 Butter-Knife"></a>初识 Butter-Knife</h1><p>Butter-Knife 是 Android 开发领域著名的开源库。<br><img src="https://jakewharton.github.io/butterknife/static/logo.png" alt="butterknife"><br><a href="https://jakewharton.github.io/butterknife/" target="_blank" rel="noopener">butterknife官网</a></p>
+<h2 id="自动绑定-View"><a href="#自动绑定-View" class="headerlink" title="自动绑定 View"></a>自动绑定 View</h2><p>Annotate fields with @BindView and a view ID for Butter Knife to find and automatically cast the corresponding view in your layout.<br>使用 @BindView(资源id) 来自动find并cast你的View。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line">  <span class="meta">@BindView</span>(R.id.title) TextView title;</span><br><span class="line">  <span class="meta">@BindView</span>(R.id.subtitle) TextView subtitle;</span><br><span class="line">  <span class="meta">@BindView</span>(R.id.footer) TextView footer;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">    setContentView(R.layout.simple_activity);</span><br><span class="line">    ButterKnife.bind(<span class="keyword">this</span>);</span><br><span class="line">    <span class="comment">// TODO Use fields...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Instead of slow reflection, code is generated to perform the view look-ups. Calling bind delegates to this generated code that you can see and debug.<br>使用慢反射？我们为view查找生成代码。调用call函数实际上会调用下面这串易读易调试的代码。</p>
+<p>The generated code for the above example is roughly equivalent to the following:<br>上例中生成的代码差不多和下面的相同。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">bind</span><span class="params">(ExampleActivity activity)</span> </span>&#123;</span><br><span class="line">  activity.subtitle = (android.widget.TextView) activity.findViewById(<span class="number">2130968578</span>);</span><br><span class="line">  activity.footer = (android.widget.TextView) activity.findViewById(<span class="number">2130968579</span>);</span><br><span class="line">  activity.title = (android.widget.TextView) activity.findViewById(<span class="number">2130968577</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="资源绑定"><a href="#资源绑定" class="headerlink" title="资源绑定"></a>资源绑定</h2><p>RESOURCE BINDING</p>
+<p>Bind pre-defined resources with @BindBool, @BindColor, @BindDimen, @BindDrawable, @BindInt, @BindString, which binds an R.bool ID (or your specified type) to its corresponding field.<br>快速绑定，绑定后可以把资源值变为java变量。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line">  <span class="meta">@BindString</span>(R.string.title) String title;</span><br><span class="line">  <span class="meta">@BindDrawable</span>(R.drawable.graphic) Drawable graphic;</span><br><span class="line">  <span class="meta">@BindColor</span>(R.color.red) <span class="keyword">int</span> red; <span class="comment">// int or ColorStateList field</span></span><br><span class="line">  <span class="meta">@BindDimen</span>(R.dimen.spacer) Float spacer; <span class="comment">// int (for pixel size) or float (for exact value) field</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="非-Activity-场合绑定"><a href="#非-Activity-场合绑定" class="headerlink" title="非 Activity 场合绑定"></a>非 Activity 场合绑定</h2><p>NON-ACTIVITY BINDING</p>
+<p>You can also perform binding on arbitrary objects by supplying your own view root.<br>你可以在非Activity中通过提供view root来进行绑定。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FancyFragment</span> <span class="keyword">extends</span> <span class="title">Fragment</span> </span>&#123;</span><br><span class="line">  <span class="meta">@BindView</span>(R.id.button1) Button button1;</span><br><span class="line">  <span class="meta">@BindView</span>(R.id.button2) Button button2;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> View <span class="title">onCreateView</span><span class="params">(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    View view = inflater.inflate(R.layout.fancy_fragment, container, <span class="keyword">false</span>);</span><br><span class="line">    ButterKnife.bind(<span class="keyword">this</span>, view);</span><br><span class="line">    <span class="comment">// TODO Use fields...</span></span><br><span class="line">    <span class="keyword">return</span> view;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Another use is simplifying the view holder pattern inside of a list adapter.<br>在 ListAdapter 中使用butterknife。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyAdapter</span> <span class="keyword">extends</span> <span class="title">BaseAdapter</span> </span>&#123;</span><br><span class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> position, View view, ViewGroup parent)</span> </span>&#123;</span><br><span class="line">    ViewHolder holder;</span><br><span class="line">    <span class="keyword">if</span> (view != <span class="keyword">null</span>) &#123;</span><br><span class="line">      holder = (ViewHolder) view.getTag();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      view = inflater.inflate(R.layout.whatever, parent, <span class="keyword">false</span>);</span><br><span class="line">      holder = <span class="keyword">new</span> ViewHolder(view);</span><br><span class="line">      view.setTag(holder);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    holder.name.setText(<span class="string">"John Doe"</span>);</span><br><span class="line">    <span class="comment">// etc...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> view;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ViewHolder</span> </span>&#123;</span><br><span class="line">    <span class="meta">@BindView</span>(R.id.title) TextView name;</span><br><span class="line">    <span class="meta">@BindView</span>(R.id.job_title) TextView jobTitle;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ViewHolder</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">      ButterKnife.bind(<span class="keyword">this</span>, view);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>You can see this implementation in action in the provided sample.</p>
+<p>Calls to <code>ButterKnife.bind</code> can be made anywhere you would otherwise put findViewById calls.</p>
+<p>Other provided binding APIs:</p>
+<p>Bind arbitrary objects using an activity as the view root. If you use a pattern like MVC you can bind the controller using its activity with ButterKnife.bind(this, activity).<br>Bind a view’s children into fields using <code>ButterKnife.bind(this)</code>. If you use <code>&lt;merge&gt;</code> tags in a layout and inflate in a custom view constructor you can call this immediately after. Alternatively, custom view types inflated from XML can use it in the <code>onFinishInflate()</code> callback.</p>
+<h2 id="生成控件list"><a href="#生成控件list" class="headerlink" title="生成控件list"></a>生成控件list</h2><p>VIEW LISTS</p>
+<p>You can group multiple views into a List or array.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@BindViews</span>(&#123; R.id.first_name, R.id.middle_name, R.id.last_name &#125;)</span><br><span class="line">List&lt;EditText&gt; nameViews;</span><br></pre></td></tr></table></figure>
+<p>The apply method allows you to act on all the views in a list at once.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ButterKnife.apply(nameViews, DISABLE);</span><br><span class="line">ButterKnife.apply(nameViews, ENABLED, <span class="keyword">false</span>);</span><br><span class="line">Action and Setter interfaces allow specifying simple behavior.</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> ButterKnife.Action&lt;View&gt; DISABLE = <span class="keyword">new</span> ButterKnife.Action&lt;View&gt;() &#123;</span><br><span class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">apply</span><span class="params">(View view, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    view.setEnabled(<span class="keyword">false</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> ButterKnife.Setter&lt;View, Boolean&gt; ENABLED = <span class="keyword">new</span> ButterKnife.Setter&lt;View, Boolean&gt;() &#123;</span><br><span class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(View view, Boolean value, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    view.setEnabled(value);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>An Android Property can also be used with the apply method.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ButterKnife.apply(nameViews, View.ALPHA, <span class="number">0.0f</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="绑定事件监听器"><a href="#绑定事件监听器" class="headerlink" title="绑定事件监听器"></a>绑定事件监听器</h2><p>LISTENER BINDING</p>
+<p>Listeners can also automatically be configured onto methods.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@OnClick</span>(R.id.submit)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">submit</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// TODO submit data to server...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>All arguments to the listener method are optional.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@OnClick</span>(R.id.submit)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">submit</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// TODO submit data to server...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Define a specific type and it will automatically be cast.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@OnClick</span>(R.id.submit)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHi</span><span class="params">(Button button)</span> </span>&#123;</span><br><span class="line">  button.setText(<span class="string">"Hello!"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Specify multiple IDs in a single binding for common event handling.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@OnClick</span>(&#123; R.id.door1, R.id.door2, R.id.door3 &#125;)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pickDoor</span><span class="params">(DoorView door)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (door.hasPrizeBehind()) &#123;</span><br><span class="line">    Toast.makeText(<span class="keyword">this</span>, <span class="string">"You win!"</span>, LENGTH_SHORT).show();</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    Toast.makeText(<span class="keyword">this</span>, <span class="string">"Try again"</span>, LENGTH_SHORT).show();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Custom views can bind to their own listeners by not specifying an ID.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FancyButton</span> <span class="keyword">extends</span> <span class="title">Button</span> </span>&#123;</span><br><span class="line">  <span class="meta">@OnClick</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TODO do something!</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="取消绑定"><a href="#取消绑定" class="headerlink" title="取消绑定"></a>取消绑定</h2><p>BINDING RESET</p>
+<p>Fragments have a different view lifecycle than activities. When binding a fragment in onCreateView, set the views to null in onDestroyView. Butter Knife returns an Unbinder instance when you call bind to do this for you. Call its unbind method in the appropriate lifecycle callback.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FancyFragment</span> <span class="keyword">extends</span> <span class="title">Fragment</span> </span>&#123;</span><br><span class="line">  <span class="meta">@BindView</span>(R.id.button1) Button button1;</span><br><span class="line">  <span class="meta">@BindView</span>(R.id.button2) Button button2;</span><br><span class="line">  <span class="keyword">private</span> Unbinder unbinder;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> View <span class="title">onCreateView</span><span class="params">(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    View view = inflater.inflate(R.layout.fancy_fragment, container, <span class="keyword">false</span>);</span><br><span class="line">    unbinder = ButterKnife.bind(<span class="keyword">this</span>, view);</span><br><span class="line">    <span class="comment">// TODO Use fields...</span></span><br><span class="line">    <span class="keyword">return</span> view;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDestroyView</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onDestroyView();</span><br><span class="line">    unbinder.unbind();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="条件绑定"><a href="#条件绑定" class="headerlink" title="条件绑定"></a>条件绑定</h2><p>OPTIONAL BINDINGS</p>
+<p>By default, both @Bind and listener bindings are required. An exception will be thrown if the target view cannot be found.<br>默认使用bind如果目标view没找到会抛出Exception。</p>
+<p>To suppress this behavior and create an optional binding, add a @Nullable annotation to fields or the @Optional annotation to methods.<br>你可以添加 <code>@Nullable</code> <code>Optional</code> 注解来避免这种行为。</p>
+<p>Note: Any annotation named @Nullable can be used for fields. It is encouraged to use the @Nullable annotation from Android’s “support-annotations” library.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Nullable</span> <span class="meta">@BindView</span>(R.id.might_not_be_there) TextView mightNotBeThere;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Optional</span> <span class="meta">@OnClick</span>(R.id.maybe_missing) <span class="function"><span class="keyword">void</span> <span class="title">onMaybeMissingClicked</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// TODO ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="多方法监听器"><a href="#多方法监听器" class="headerlink" title="多方法监听器"></a>多方法监听器</h2><p>MULTI-METHOD LISTENERS</p>
+<p>Method annotations whose corresponding listener has multiple callbacks can be used to bind to any one of them. Each annotation has a default callback that it binds to. Specify an alternate using the callback parameter.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@OnItemSelected</span>(R.id.list_view)</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">onItemSelected</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// TODO ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@OnItemSelected</span>(value = R.id.maybe_missing, callback = NOTHING_SELECTED)</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">onNothingSelected</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// TODO ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="下载、使用"><a href="#下载、使用" class="headerlink" title="下载、使用"></a>下载、使用</h2><p>Download</p>
+<p>GRADLE</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">implementation &apos;com.jakewharton:butterknife:(insert latest version)&apos;</span><br><span class="line">annotationProcessor &apos;com.jakewharton:butterknife-compiler:(insert latest version)&apos;</span><br></pre></td></tr></table></figure>
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/09/09/Butter-knife 黄油刀简述/">
+    <time datetime="2018-09-08T16:27:47.309Z" class="entry-date">
+        2018-09-09
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+
+
+
+
+  
+    <article id="post-邮件同步折腾经验" class="post-邮件同步折腾经验 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://dexfire.iask.in/2018/09/06/邮件同步折腾经验/" data-id="cjltn8s950000gwusinfs2anm" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/09/06/邮件同步折腾经验/">
+    <time datetime="2018-09-06T15:42:40.049Z" class="entry-date">
+        2018-09-06
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+
+
+
+
+  
     <article id="post-greek_alpha_set" class="post-greek_alpha_set post type-post status-publish format-standard hentry">
     <!---->
 
@@ -528,6 +645,14 @@
       <ul>
         
           <li>
+            <a href="/2018/09/09/Butter-knife 黄油刀简述/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/06/邮件同步折腾经验/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2018/09/06/greek_alpha_set/">常用字母符号表</a>
           </li>
         
@@ -537,10 +662,6 @@
         
           <li>
             <a href="/2018/09/05/Windows bcdedit 初体验/">Windows bcdedit 初体验</a>
-          </li>
-        
-          <li>
-            <a href="/2018/09/02/hello-world/">Hello World</a>
           </li>
         
       </ul>
